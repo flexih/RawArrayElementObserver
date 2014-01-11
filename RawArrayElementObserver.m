@@ -106,7 +106,7 @@ instance_variable(NSObject *obj, const char *ivararr, void **pbase, size_t *carr
         NSScanner *scanner = [NSScanner scannerWithString:key];
         [scanner setScanLocation:location + 1];
         
-        if ([scanner scanInteger:index]) {
+        if ([scanner scanInteger:(NSInteger *)index]) {
             NSString *var = [key substringToIndex:location];
             if (ivar != nil) {
                 *ivar = var;
