@@ -72,7 +72,7 @@ instance_variable(NSObject *obj, const char *ivararr, void **pbase, size_t *carr
         int count;
         
         if (sscanf(type, "[%d%s]", &count, encoding) == 2) {
-            encoding[strlen(encoding) - 1] = '\0';
+            encoding[strlen(encoding) - 1] = '\0'; //eat ']'
             void *p = (char *)(__bridge void *)obj + ivar_getOffset(ivar);
             
             *pbase = p;
