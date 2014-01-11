@@ -21,6 +21,6 @@
  keyPath format:
     ivar[index]
  */
-- (NSString *)keyPathForIvar:(NSString *)ivar index:(NSInteger)index;
+- (NSString *)keyPathForIvar:(NSString *)ivar index:(NSUInteger)index;
 
 @end

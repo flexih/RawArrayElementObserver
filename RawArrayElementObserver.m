@@ -92,12 +92,12 @@ instance_variable(NSObject *obj, const char *ivararr, void **pbase, size_t *carr
 
 @implementation RawArrayElementObserver
 
-- (NSString *)keyPathForIvar:(NSString *)ivar index:(NSInteger)index
+- (NSString *)keyPathForIvar:(NSString *)ivar index:(NSUInteger)index
 {
-    return [NSString stringWithFormat:@"%@[%ld]", ivar, (long)index];
+    return [NSString stringWithFormat:@"%@[%lu]", ivar, (unsigned long)index];
 }
 
-- (BOOL)validateKey:(NSString *)key ivar:(NSString * __autoreleasing *)ivar index:(NSInteger *)index
+- (BOOL)validateKey:(NSString *)key ivar:(NSString * __autoreleasing *)ivar index:(NSUInteger *)index
 {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF LIKE %@", @"*[?*]"];
     
@@ -110,8 +110,8 @@ instance_variable(NSObject *obj, const char *ivararr, void **pbase, size_t *carr
             NSString *var = [key substringToIndex:location];
             if (ivar != nil) {
                 *ivar = var;
-                return YES;
             }
+            return YES;
         }
     }
     
@@ -121,7 +121,7 @@ instance_variable(NSObject *obj, const char *ivararr, void **pbase, size_t *carr
 - (void)setValue:(id)value forUndefinedKey:(NSString *)key
 {
     NSString *var;
-    NSInteger index;
+    NSUInteger index;
     
     if ([self validateKey:key ivar:&var index:&index]) {
         size_t carr, esz;
@@ -133,9 +133,12 @@ instance_variable(NSObject *obj, const char *ivararr, void **pbase, size_t *carr
                 r = (char *)p + index * esz;
                 if (strcmp([(NSValue *)value objCType], et) == 0) {
                     [(NSValue *)value getValue:r];
+                    free(et);
                     return;
                 }
             }
+
+            free(et);
         }
     }
     
@@ -145,7 +148,7 @@ instance_variable(NSObject *obj, const char *ivararr, void **pbase, size_t *carr
 - (id)valueForUndefinedKey:(NSString *)key
 {
     NSString *var;
-    NSInteger index;
+    NSUInteger index;
     
     if ([self validateKey:key ivar:&var index:&index]) {
         size_t carr, esz;
@@ -159,6 +162,8 @@ instance_variable(NSObject *obj, const char *ivararr, void **pbase, size_t *carr
                 free(et);
                 return value;
             }
+
+            free(et);
         }
     }
     
