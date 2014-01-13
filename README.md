@@ -1,4 +1,8 @@
 RawArrayElementObserver
 =======================
 KVO compatible for element( c types) of array.<br />
-Add observer for array element, element setter wrappered by NSValue
+
+ what:
+    add observer for array element, element setter wrappered by NSValue
+ how:
+    inherite(recommended) or copy the methods to your class
