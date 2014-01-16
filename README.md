@@ -6,4 +6,4 @@ KVO compatible for element( c types) of array.
     add observer for array element, element setter wrappered by NSValue
  <br/>
  how:<br/>
-    inherite(recommended) or copy the methods to your class
+ 	use NSObject category or inherite(recommended) or copy the methods to your class
