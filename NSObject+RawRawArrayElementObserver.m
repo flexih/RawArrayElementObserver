@@ -105,7 +105,7 @@ IMP swizz_method(Class cls, SEL origin, SEL new)
 
 + (void)load
 {
-    if (self == [self class]) {
+    if (self == [NSObject class]) {
         setUndefinedKeyIMP = swizz_method(self, @selector(setValue:forUndefinedKey:), @selector(newSetValue:forUndefinedKey:));
         undefinedKeyIMP = swizz_method(self, @selector(valueForUndefinedKey:), @selector(newValueForUndefinedKey:));
     }
