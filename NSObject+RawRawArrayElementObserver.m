@@ -21,7 +21,7 @@ encoding_type_length(const char *p, size_t len)
     switch (p[0]) {
         case 'c':
         case 'C':
-        case 'b':
+        case 'B':
             return sizeof(char);
         case 'i':
         case 'I':
